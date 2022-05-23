@@ -19,6 +19,4 @@ def test_environment_is_dev(app_config):
 @mark.xfail(reason="\nThis feature should have been deprecated")
 def test_environment_is_staging(app_config):
     base_url = app_config.base_url
-    port = app_config.app_port
-    assert base_url == 'https://mydev-env.com'
-    assert port == 8080
+    assert base_url == 'staging'
