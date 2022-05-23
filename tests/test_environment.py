@@ -1,3 +1,7 @@
+from pytest import mark
+
+
+@mark.skip(reason="\nBroken, fixing next sprint")
 def test_environment_is_qa(app_config):
     base_url = app_config.base_url
     port = app_config.app_port
@@ -6,6 +10,14 @@ def test_environment_is_qa(app_config):
 
 
 def test_environment_is_dev(app_config):
+    base_url = app_config.base_url
+    port = app_config.app_port
+    assert base_url == 'https://mydev-env.com'
+    assert port == 8080
+
+
+@mark.xfail(reason="\nThis feature should have been deprecated")
+def test_environment_is_staging(app_config):
     base_url = app_config.base_url
     port = app_config.app_port
     assert base_url == 'https://mydev-env.com'
